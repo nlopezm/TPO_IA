@@ -18,27 +18,37 @@ final class PersonGroupController {
     }
 
     public function createCurso(RequestInterface $request, ResponseInterface $response, $args) {
-        $curso = strtolower($args['curso']);
-        $name = $request->getParsedBody()['name'];
-        $userData = $request->getParsedBody()['userData'];
-        $curso = $this->repository->createCurso($curso, $name);
+        $personGroupId = strtolower($args['curso']);
+        $name = $request->getParsedBody()['nombre'];
+        $this->azure->personGroupCreate($personGroupId, $name);
+        $curso = $this->repository->createCurso($personGroupId, $name);
         return $response->withStatus(200)->withJson($curso);
     }
 
     public function getCurso(RequestInterface $request, ResponseInterface $response, $args) {
-        $curso = $this->repository->get(strtolower($args['curso']));
+        $personGroupId = strtolower($args['curso']);
+        $curso = $this->repository->get($personGroupId);
+//        $curso = $this->azure->getPersonGroup($personGroupId);
         return $response->withStatus(200)->withJson($curso);
     }
 
     public function train(RequestInterface $request, ResponseInterface $response, $args) {
-        $curso = strtolower($args['curso']);
-        return $response->withStatus(200)->withJson($curso);
+        $personGroupId = strtolower($args['curso']);
+        $res = $this->azure->trainPersonGroup($personGroupId);
+        return $response->withStatus(200)->withJson($res);
     }
 
-    public function identifyFace(RequestInterface $request, ResponseInterface $response, $args) {
-        $curso = strtolower($args['curso']);
+    public function tomarAsistencia(RequestInterface $request, ResponseInterface $response, $args) {
+        $personGroupId = strtolower($args['curso']);
         $url = $request->getParsedBody()['url'];
-        return $response->withStatus(200)->withJson($curso);
+
+        $faces = $this->azure->detect($url);
+        $faceIds = array();
+        foreach ($faces as $face)
+            array_push($faceIds, $face['faceId']);
+
+        $res = $this->azure->identify($faceIds, $personGroupId);
+        return $response->withStatus(200)->withJson($res);
     }
 
 }

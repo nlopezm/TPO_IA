@@ -13,7 +13,7 @@ class PersonGroupRepository extends AbstractRepository {
     }
 
     public function createCurso($personGroupId, $nombre) {
-        $entity = new Curso(uniqid(), $nombre);
+        $entity = new Curso($personGroupId, $nombre);
         $this->entityManager->persist($entity);
         $this->entityManager->flush($entity);
         return $entity->getArrayCopy();

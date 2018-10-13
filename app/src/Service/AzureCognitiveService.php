@@ -14,22 +14,32 @@ class AzureCognitiveService {
 
     public function detect($imagen_url) {
         $url = AZURE_BASE_URL . 'detect';
-        $body['url'] = $img;
+        $body['url'] = $imagen_url;
         return $this->http->post($url, $body);
     }
 
     public function identify($faceIds, $personGroupId, $maxNumOfCandidatesReturned = 1) {
         $url = AZURE_BASE_URL . 'identify';
-        $body['faceIds '] = $faceIds;
         $body['personGroupId '] = $personGroupId;
         $body['maxNumOfCandidatesReturned '] = $maxNumOfCandidatesReturned;
-        return $this->http->post($url, $body);
+        $grupos = array_chunk($faceIds, 10);
+        $response = array();
+        foreach ($grupos as $faces) {
+            $body['faceIds '] = $faces;
+            array_push($response, $this->http->post($url, $body));
+        }
+        return $response;
     }
 
     public function personGroupCreate($personGroupId, $curso) {
         $url = AZURE_BASE_URL . 'persongroups/' . $personGroupId;
-        $body['curso '] = $curso;
+        $body['name'] = $curso;
         return $this->http->put($url, $body);
+    }
+
+    public function getPersonGroup($personGroupId) {
+        $url = AZURE_BASE_URL . 'persongroups/' . $personGroupId . '/persons';
+        return $this->http->get($url);
     }
 
     public function trainPersonGroup($personGroupId) {
@@ -41,7 +51,8 @@ class AzureCognitiveService {
         $url = AZURE_BASE_URL . 'persongroups/' . $personGroupId . '/persons';
         $body['name'] = $legajo;
         $body['userData'] = $nombre;
-        return $this->http->post($url, $body);
+        $res = $this->http->post($url, $body);
+        return $res['personId'];
     }
 
     public function personAddFace($personGroupId, $personId, $imagen_url) {
