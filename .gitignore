@@ -2,4 +2,4 @@ vendor/
 log/*
 cache/*
 /nbproject/private/
-app/config/parameters.prod.php
+app/config/parameters.prod
