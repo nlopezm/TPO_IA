@@ -46,7 +46,7 @@ final class PersonGroupController {
         $faceIds = array();
         foreach ($faces as $face)
             array_push($faceIds, $face['faceId']);
-
+        
         $res = $this->azure->identify($faceIds, $personGroupId);
         return $response->withStatus(200)->withJson($res);
     }

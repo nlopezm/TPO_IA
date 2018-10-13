@@ -20,12 +20,12 @@ class AzureCognitiveService {
 
     public function identify($faceIds, $personGroupId, $maxNumOfCandidatesReturned = 1) {
         $url = AZURE_BASE_URL . 'identify';
-        $body['personGroupId '] = $personGroupId;
-        $body['maxNumOfCandidatesReturned '] = $maxNumOfCandidatesReturned;
+        $body['personGroupId'] = $personGroupId;
+        $body['maxNumOfCandidatesReturned'] = $maxNumOfCandidatesReturned;
         $grupos = array_chunk($faceIds, 10);
         $response = array();
         foreach ($grupos as $faces) {
-            $body['faceIds '] = $faces;
+            $body['faceIds'] = $faces;
             array_push($response, $this->http->post($url, $body));
         }
         return $response;
