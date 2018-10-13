@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__ . '/config/parameters.dev.php';
 return [
     'settings' => [
         'displayErrorDetails' => true,
@@ -19,10 +19,10 @@ return [
             ],
             'connection' => [
                 'driver' => 'pdo_mysql',
-                'host' => 'localhost',
-                'dbname' => 'TPO_IA',
-                'user' => 'admin',
-                'password' => '123456',
+                'host' => DB_HOST,
+                'dbname' => DB_NAME,
+                'user' => DB_USERNAME,
+                'password' => DB_PASSWORD,
             ]
         ]
     ],

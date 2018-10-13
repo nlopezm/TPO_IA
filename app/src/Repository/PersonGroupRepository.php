@@ -5,10 +5,6 @@ namespace App\Repository;
 use App\AbstractRepository;
 use App\Entity\Curso;
 
-/**
- * Class Resource
- * @package App
- */
 class PersonGroupRepository extends AbstractRepository {
 
     public function get($personGroupId) {

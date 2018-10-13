@@ -23,14 +23,24 @@ $container['em'] = function ($c) {
 };
 
 // -----------------------------------------------------------------------------
+// Services
+// -----------------------------------------------------------------------------
+$container['App\Service\AzureCognitiveService'] = function ($c) {
+    $service = new \App\Service\HttpService();
+    return new App\Service\AzureCognitiveService($service);
+};
+
+// -----------------------------------------------------------------------------
 // Controller
 // -----------------------------------------------------------------------------
 
 $container['App\Controller\PersonGroupController'] = function ($c) {
     $repository = new \App\Repository\PersonGroupRepository($c->get('em'));
-    return new App\Controller\PersonGroupController($repository);
+    $azure = $c->get('App\Service\AzureCognitiveService');
+    return new App\Controller\PersonGroupController($repository, $azure);
 };
 $container['App\Controller\PersonController'] = function ($c) {
     $repository = new \App\Repository\PersonRepository($c->get('em'));
-    return new App\Controller\PersonController($repository);
+    $azure = $c->get('App\Service\AzureCognitiveService');
+    return new App\Controller\PersonController($repository, $azure);
 };

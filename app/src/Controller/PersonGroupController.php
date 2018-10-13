@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Repository\PersonGroupRepository;
+use App\Service\AzureCognitiveService;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class PersonGroupController {
 
     private $repository;
+    private $azure;
 
-    public function __construct(PersonGroupRepository $repository) {
+    public function __construct(PersonGroupRepository $repository, AzureCognitiveService $azure) {
         $this->repository = $repository;
+        $this->azure = $azure;
     }
 
     public function createCurso(RequestInterface $request, ResponseInterface $response, $args) {
