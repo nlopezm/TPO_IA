@@ -21,7 +21,7 @@ $app = new \Slim\App($settings);
 require __DIR__ . '/app/dependencies.php';
 
 // Register routes
-require __DIR__ . '/dapp/routes.php';
+require __DIR__ . '/app/routes.php';
 
 // Run!
 $app->run();

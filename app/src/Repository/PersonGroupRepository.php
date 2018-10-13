@@ -11,11 +11,6 @@ use App\Entity\Curso;
  */
 class PersonGroupRepository extends AbstractRepository {
 
-    /**
-     * @param string|null $slug
-     *
-     * @return array
-     */
     public function get($personGroupId) {
         $curso = $this->entityManager->getRepository('App\Entity\Curso')->findOneByPersonGroupId($personGroupId);
         return $curso->getArrayCopy();

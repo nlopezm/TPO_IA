@@ -1,14 +1,11 @@
 {
-    "name": "akrabat/slim3-skeleton",
-    "description": "Simple Slim Framework 3 skeleton with Twig & Monolog.",
-    "license": "BSD-3-Clause",
+    "name": "TPO-IA",
+    "description": "Grupo 3 - TPO Inteligencia Artificial",
     "type": "project",
-    "keywords": ["slim-framework", "skeleton"],
     "authors": [
         {
-            "name": "Rob Allen",
-            "email": "rob@akrabat.com",
-            "homepage": "http://akrabat.com"
+            "name": "Nahuel López",
+            "email": "nahuel.lopez.1997@gmail.com"
         }
     ],
     "autoload": {
