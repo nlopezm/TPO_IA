@@ -26,7 +26,7 @@ class AzureCognitiveService {
         $response = array();
         foreach ($grupos as $faces) {
             $body['faceIds'] = $faces;
-            array_push($response, $this->http->post($url, $body));
+            $response = array_merge($response, $this->http->post($url, $body));
         }
         return $response;
     }
