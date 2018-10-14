@@ -1,0 +1,246 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "TPO Inteligencia Artifical Grupo",
+    "version": "1.0.0",
+    "title": "TPO IA",
+    "contact": {
+      "email": "nahuel.lopez.1997@gmail.com"
+    }
+  },
+  "host": "prod.d7ucdsxzqq.us-east-1.elasticbeanstalk.com",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Curso",
+      "description": ""
+    },
+    {
+      "name": "Alumno",
+      "description": ""
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/persongroups/{cursoId}": {
+      "put": {
+        "tags": [
+          "Curso"
+        ],
+        "summary": "Da de alta un curso",
+        "description": "",
+        "operationId": "addCurso",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "example": "{ \"nombre\":\"Inteligencia Artificial\" }"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Curso creado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Curso"
+        ],
+        "summary": "Obtiene un curso",
+        "description": "Se le puede pasar como parámetro adicional si querés que te devuelva los alumnos y/o las clases asociadas a ese curso. (Ej: .../curso12547?expand=alumnos,clases",
+        "operationId": "getCurso",
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Curso obtenido"
+          }
+        }
+      }
+    },
+    "/persongroups/{cursoId}/train": {
+      "post": {
+        "tags": [
+          "Curso"
+        ],
+        "summary": "Entrena el modelo",
+        "description": "",
+        "operationId": "trainCurso",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Curso entrenado"
+          }
+        }
+      }
+    },
+    "/persongroups/{cursoId}/asistencia": {
+      "post": {
+        "tags": [
+          "Curso"
+        ],
+        "summary": "Toma asistencia del curso",
+        "description": "",
+        "operationId": "tomarAsistencia",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Url de la imagen con una o más personas",
+            "required": true,
+            "schema": {
+              "example": "{ \"url\":\"https://123halamadrid.files.wordpress.com/2015/07/alineacion-real-madrid.jpg\" }"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se tomó asistencia"
+          }
+        }
+      }
+    },
+    "/persongroups/{cursoId}/persons": {
+      "post": {
+        "tags": [
+          "Alumno"
+        ],
+        "summary": "Da de alta un alumno a un curso",
+        "description": "",
+        "operationId": "addAlumno",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "example": "{ \"nombre\":\"Nahuel\", \"apellido\":\"López\", \"legajo\":1075422 }"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alumno creado"
+          }
+        }
+      }
+    },
+    "/persongroups/{cursoId}/persons/{legajo}": {
+      "post": {
+        "tags": [
+          "Alumno"
+        ],
+        "summary": "Agrega una foto de un alumno",
+        "description": "",
+        "operationId": "addFoto",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "description": "ID del curso de WebCampus",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "legajo",
+            "in": "path",
+            "description": "Legajo del alumno",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "example": "{ \"url\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUfC8IUWdH_V6XP9UUwyyX-DtgDcySv2RY3s7u4kGONBqrtDvt2Q\", }"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agregó una foto del alumno"
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,3 +8,7 @@ $app->post('/api/persongroups/{curso}/train', 'App\Controller\PersonGroupControl
 $app->post('/api/persongroups/{curso}/asistencia', 'App\Controller\PersonGroupController:tomarAsistencia');
 $app->post('/api/persongroups/{curso}/persons', 'App\Controller\PersonController:createPerson');
 $app->post('/api/persongroups/{curso}/persons/{alumno}', 'App\Controller\PersonController:addFace');
+$app->get('/api/doc', function($request, $response, $args) {
+    $apiDoc = file_get_contents(__DIR_ . '/../swagger.html');
+    return $apiDoc;
+});
