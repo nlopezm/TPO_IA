@@ -95,8 +95,25 @@ class Curso {
         return $this;
     }
 
-    public function getArrayCopy() {
-        return get_object_vars($this);
+    public function getArrayCopy(array $expands) {
+        $array = get_object_vars($this);
+        unset($array['alumnos']);
+        unset($array['clases']);
+        foreach ($expands as $expand) {
+            if (!strcasecmp($expand, "alumnos")) {
+                $alumnos = array();
+                foreach ($this->alumnos as $clase)
+                    array_push($alumnos, $clase->getArrayCopy());
+                $array['alumnos'] = $alumnos;
+            }
+            if (!strcasecmp($expand, "clases")) {
+                $clases = array();
+                foreach ($this->clases as $clase)
+                    array_push($clases, $clase->getArrayCopy());
+                $array['clases'] = $clases;
+            }
+        }
+        return $array;
     }
 
     public function addAlumno($alumno) {

@@ -45,9 +45,11 @@ class PersonGroupRepository extends AbstractRepository {
     }
 
     public function alumnoPresente(&$clase, $personId) {
-        $alumno = $this->entityManager->getRepository("App\Entity\Alumno")->findOneByPersonId($personId);
-        $clase->addAlumno($alumno);
-        $this->entityManager->flush($clase);
+        try {
+            $alumno = $this->entityManager->getRepository("App\Entity\Alumno")->findOneByPersonId($personId);
+            $clase->addAlumno($alumno);
+            $this->entityManager->flush($clase);
+        } catch (\Exception $e) {}
     }
 
 }

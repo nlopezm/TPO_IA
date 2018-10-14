@@ -27,8 +27,8 @@ final class PersonGroupController {
 
     public function getCurso(RequestInterface $request, ResponseInterface $response, $args) {
         $personGroupId = strtolower($args['curso']);
-        $curso = $this->repository->get($personGroupId);
-//        $curso = $this->azure->getPersonGroup($personGroupId);
+        $queryString = explode(",", $request->getQueryParam('expand'));
+        $curso = $this->repository->get($personGroupId)->getArrayCopy($queryString);
         return $response->withStatus(200)->withJson($curso);
     }
 
