@@ -5,10 +5,6 @@ namespace App\Repository;
 use App\AbstractRepository;
 use App\Entity\Alumno;
 
-/**
- * Class Resource
- * @package App
- */
 class PersonRepository extends AbstractRepository {
 
     public function createPerson($personGroupId, $personId, $legajo, $nombre, $apellido) {

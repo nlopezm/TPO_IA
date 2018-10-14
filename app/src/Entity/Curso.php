@@ -104,4 +104,9 @@ class Curso {
         return $this;
     }
 
+    public function addClase($clase) {
+        $this->clases[] = $clase;
+        return $this;
+    }
+
 }
