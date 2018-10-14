@@ -2,4 +2,4 @@ vendor/
 log/*
 cache/*
 /nbproject/private/
-app/config/*
+app/config/
