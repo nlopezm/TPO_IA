@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/config/parameters.dev.php';
+include_once __DIR__ . '/config/parameters.dev';
 return [
     'settings' => [
         'displayErrorDetails' => true,
