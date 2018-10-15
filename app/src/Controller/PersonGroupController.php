@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\PersonGroupRepository;
 use App\Service\AzureCognitiveService;
+use App\Service\ImageService;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -11,10 +12,12 @@ final class PersonGroupController {
 
     private $repository;
     private $azure;
+    private $image;
 
-    public function __construct(PersonGroupRepository $repository, AzureCognitiveService $azure) {
+    public function __construct(PersonGroupRepository $repository, AzureCognitiveService $azure, ImageService $imageService) {
         $this->repository = $repository;
         $this->azure = $azure;
+        $this->image = $imageService;
     }
 
     public function createCurso(RequestInterface $request, ResponseInterface $response, $args) {
@@ -40,8 +43,7 @@ final class PersonGroupController {
 
     public function tomarAsistencia(RequestInterface $request, ResponseInterface $response, $args) {
         $personGroupId = strtolower($args['curso']);
-        $url = $request->getParsedBody()['url'];
-
+        $url = $request->getParsedBody()['url'] ? $request->getParsedBody()['url'] : $this->image->guardarImagen($request->getParsedBody()['base64']);
         $faces = $this->azure->detect($url);
         $faceIds = array();
         foreach ($faces as $face)
