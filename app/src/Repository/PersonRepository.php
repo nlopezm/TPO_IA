@@ -7,9 +7,9 @@ use App\Entity\Alumno;
 
 class PersonRepository extends AbstractRepository {
 
-    public function createPerson($personGroupId, $personId, $legajo, $nombre, $apellido) {
+    public function createPerson($personGroupId, $personId, $legajo, $nombre, $apellido, $foto) {
         $curso = $this->entityManager->getRepository('App\Entity\Curso')->findOneByPersonGroupId($personGroupId);
-        $entity = new Alumno($personId, $legajo, $nombre, $apellido);
+        $entity = new Alumno($personId, $legajo, $nombre, $apellido, $foto);
         $curso->addAlumno($entity);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();

@@ -42,11 +42,12 @@ class Alumno {
      */
     protected $foto;
 
-    function __construct($personId, $legajo, $nombre, $apellido) {
+    function __construct($personId, $legajo, $nombre, $apellido, $foto) {
         $this->personId = $personId;
         $this->legajo = $legajo;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
+        $this->foto = $foto;
     }
 
     function getId() {

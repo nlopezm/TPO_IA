@@ -37,10 +37,12 @@ $container['App\Service\AzureCognitiveService'] = function ($c) {
 $container['App\Controller\PersonGroupController'] = function ($c) {
     $repository = new \App\Repository\PersonGroupRepository($c->get('em'));
     $azure = $c->get('App\Service\AzureCognitiveService');
-    return new App\Controller\PersonGroupController($repository, $azure);
+    $imageService = new \App\Service\ImageService;
+    return new App\Controller\PersonGroupController($repository, $azure, $imageService);
 };
 $container['App\Controller\PersonController'] = function ($c) {
     $repository = new \App\Repository\PersonRepository($c->get('em'));
     $azure = $c->get('App\Service\AzureCognitiveService');
-    return new App\Controller\PersonController($repository, $azure);
+    $imageService = new \App\Service\ImageService;
+    return new App\Controller\PersonController($repository, $azure, $imageService);
 };
