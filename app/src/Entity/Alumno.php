@@ -37,6 +37,11 @@ class Alumno {
      */
     protected $apellido;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $foto;
+
     function __construct($personId, $legajo, $nombre, $apellido) {
         $this->personId = $personId;
         $this->legajo = $legajo;
@@ -64,6 +69,10 @@ class Alumno {
         return $this->apellido;
     }
 
+    function getFoto() {
+        return $this->foto;
+    }
+
     function setId($id) {
         $this->id = $id;
         return $this;
@@ -86,6 +95,11 @@ class Alumno {
 
     function setApellido($apellido) {
         $this->apellido = $apellido;
+        return $this;
+    }
+
+    function setFoto($foto) {
+        $this->foto = $foto;
         return $this;
     }
 
