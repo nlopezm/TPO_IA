@@ -31,6 +31,7 @@ class Curso {
 
     /**
      * @ORM\ManyToMany(targetEntity="Alumno")
+     * @ORM\OrderBy({"apellido" = "ASC", "nombre" = "ASC"})
      * @ORM\JoinTable(name="curso_alumne",
      *      joinColumns={@ORM\JoinColumn(name="curso_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="alumno_id", referencedColumnName="id")}
@@ -39,6 +40,7 @@ class Curso {
     protected $alumnos;
 
     /**
+     * @ORM\OrderBy({"fecha" = "ASC"})
      * @ORM\OneToMany(targetEntity="Clase", mappedBy="curso", cascade={"persist","remove"})
      */
     protected $clases;

@@ -30,6 +30,7 @@ class Clase {
 
     /**
      * @ORM\ManyToMany(targetEntity="Alumno")
+     * @ORM\OrderBy({"apellido" = "ASC", "nombre" = "ASC"})
      * @ORM\JoinTable(name="clase_alumne",
      *      joinColumns={@ORM\JoinColumn(name="clase_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="alumno_id", referencedColumnName="id")}
