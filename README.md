@@ -8,9 +8,7 @@ Cumple con lo necesario pero tiene errores, si quieren modifiquenlo.
 - Crear carpeta app/config:
 	Crear archivo parameters.dev:
 	'''php
-		<?php
-
-			define('DB_USERNAME', '');
+		<?php	define('DB_USERNAME', '');
 			define('DB_PASSWORD', '');
 			define('DB_HOST', 'localhost');
 			define('DB_NAME', 'TPO_IA');
