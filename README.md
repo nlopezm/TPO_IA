@@ -7,7 +7,6 @@ Cumple con lo necesario pero tiene errores, si quieren modifiquenlo.
 - Composer update
 - Crear carpeta app/config:
 	Crear archivo parameters.dev:
-	'''php
 	
 			define('DB_USERNAME', '');
 			define('DB_PASSWORD', '');
@@ -17,5 +16,4 @@ Cumple con lo necesario pero tiene errores, si quieren modifiquenlo.
 			define('AZURE_BASE_URL', 'https://eastus2.api.cognitive.microsoft.com/face/v1.0/');
 			define ('S3_KEY', '');
 			define ('S3_SECRET', '');
-'''
 
