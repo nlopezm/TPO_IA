@@ -18,4 +18,4 @@ Cumple con lo necesario pero tiene errores, si quieren modifiquenlo.
 			define ('S3_SECRET', '');
 
 #### API DOC:
-'''http://prod.d7ucdsxzqq.us-east-1.elasticbeanstalk.com/api/doc'''
+http://prod.d7ucdsxzqq.us-east-1.elasticbeanstalk.com/api/doc
