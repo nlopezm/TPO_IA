@@ -1,13 +1,13 @@
-TPO IA
+## TPO IA
 
-- Instalar php
-- Instalar apache
-- Instalar composer
-- Ir a la carpeta del proyecto y actualizar composer
+Cumple con lo necesario pero tiene errores, si quieren modifiquenlo.
+
+- Instalar php y composer
+- Ir a la carpeta del proyecto
+- Composer update
 - Crear carpeta app/config:
 	Crear archivo parameters.dev:
-		<?php
-
+	
 			define('DB_USERNAME', '');
 			define('DB_PASSWORD', '');
 			define('DB_HOST', 'localhost');
@@ -17,4 +17,5 @@ TPO IA
 			define ('S3_KEY', '');
 			define ('S3_SECRET', '');
 
-
+#### API DOC:
+http://prod.d7ucdsxzqq.us-east-1.elasticbeanstalk.com/api/doc
