@@ -19,23 +19,27 @@ class ImageService {
         ]);
     }
 
-    public function guardarImagen($base64) {
-        $imagen = $this->getDecodificada($base64);
-        $f = finfo_open();
+    public function guardarImagen($base64Array) {
+        $imagenes = array();
+        foreach ($base64Array as $base64) {
+            $imagen = $this->getDecodificada($base64);
+            $f = finfo_open();
 
-        $mime_type = finfo_buffer($f, $imagen, FILEINFO_MIME_TYPE);
-        try {
-            $result = $this->s3->putObject([
-                'Bucket' => 'ia.imagenes',
-                'Key' => 'images/' . uniqid() . '.' . explode('/', $mime_type)[1],
-                'Body' => $imagen,
-                'ContentType' => $mime_type,
-                'ACL' => 'public-read',
-            ]);
-            return $result['ObjectURL'];
-        } catch (Aws\S3\Exception\S3Exception $e) {
-            throw new \Exception($e);
+            $mime_type = finfo_buffer($f, $imagen, FILEINFO_MIME_TYPE);
+            try {
+                $result = $this->s3->putObject([
+                    'Bucket' => 'ia.imagenes',
+                    'Key' => 'images/' . uniqid() . '.' . explode('/', $mime_type)[1],
+                    'Body' => $imagen,
+                    'ContentType' => $mime_type,
+                    'ACL' => 'public-read',
+                ]);
+                array_push($imagenes, $result['ObjectURL']);
+            } catch (Aws\S3\Exception\S3Exception $e) {
+                throw new \Exception($e);
+            }
         }
+        return $imagenes;
     }
 
     private function getDecodificada($base64) {

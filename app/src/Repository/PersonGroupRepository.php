@@ -32,7 +32,7 @@ class PersonGroupRepository extends AbstractRepository {
             if (sizeof($alumno['candidates']) && $alumno['candidates'] >= CONFIDENCE) {
                 $this->alumnoPresente($clase, $alumno['candidates'][0]['personId']);
             }
-        return $clase->getArrayCopy();
+        return array_unique($clase->getArrayCopy());
     }
 
     private function getClase($personGroupId) {
@@ -46,7 +46,6 @@ class PersonGroupRepository extends AbstractRepository {
         $this->entityManager->persist($clase);
         $this->entityManager->flush($clase);
         return $clase;
-        ;
     }
 
     public function alumnoPresente(&$clase, $personId) {

@@ -40,7 +40,7 @@ final class PersonGroupController {
         $res = array();
         $cursos = $this->repository->getAll();
         foreach ($cursos as $curso)
-            array_push ($res, $curso->getArrayCopy($queryString));
+            array_push($res, $curso->getArrayCopy($queryString));
         return $response->withStatus(200)->withJson($res);
     }
 
@@ -53,10 +53,12 @@ final class PersonGroupController {
     public function tomarAsistencia(RequestInterface $request, ResponseInterface $response, $args) {
         $personGroupId = strtolower($args['curso']);
         $url = $request->getParsedBody()['url'] ? $request->getParsedBody()['url'] : $this->image->guardarImagen($request->getParsedBody()['base64']);
-        $faces = $this->azure->detect($url);
         $faceIds = array();
-        foreach ($faces as $face)
-            array_push($faceIds, $face['faceId']);
+        foreach ($url as $img) {
+            $faces = $this->azure->detect($img);
+            foreach ($faces as $face)
+                array_push($faceIds, $face['faceId']);
+        }
 
         $alumnos = $this->azure->identify($faceIds, $personGroupId);
         $res = $this->repository->tomarAsistencia($personGroupId, $alumnos);

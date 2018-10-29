@@ -90,7 +90,7 @@ class Clase {
         $alumnos = array();
         foreach ($this->alumnos as $alumno)
             array_push($alumnos, $alumno->getArrayCopy());
-        $array['alumnos'] = $alumnos;
+        $array['alumnos'] = array_unique($alumnos);
         return $array;
     }
 
