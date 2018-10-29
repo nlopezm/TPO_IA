@@ -2,6 +2,7 @@
 
 // Routes
 
+$app->get('/api/persongroups', 'App\Controller\PersonGroupController:getCursos');
 $app->put('/api/persongroups/{curso}', 'App\Controller\PersonGroupController:createCurso');
 $app->get('/api/persongroups/{curso}', 'App\Controller\PersonGroupController:getCurso');
 $app->post('/api/persongroups/{curso}/train', 'App\Controller\PersonGroupController:train');

@@ -35,6 +35,15 @@ final class PersonGroupController {
         return $response->withStatus(200)->withJson($curso);
     }
 
+    public function getCursos(RequestInterface $request, ResponseInterface $response, $args) {
+        $queryString = explode(",", $request->getQueryParam('expand'));
+        $res = array();
+        $cursos = $this->repository->getAll();
+        foreach ($cursos as $curso)
+            array_push ($res, $curso->getArrayCopy($queryString));
+        return $response->withStatus(200)->withJson($res);
+    }
+
     public function train(RequestInterface $request, ResponseInterface $response, $args) {
         $personGroupId = strtolower($args['curso']);
         $res = $this->azure->trainPersonGroup($personGroupId);

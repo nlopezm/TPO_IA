@@ -7,6 +7,11 @@ use App\Entity\Curso;
 use App\Entity\Clase;
 
 class PersonGroupRepository extends AbstractRepository {
+    
+    public function getAll() {
+        $cursos = $this->entityManager->getRepository('App\Entity\Curso')->findAll();
+        return $cursos;
+    }
 
     public function get($personGroupId) {
         $curso = $this->entityManager->getRepository('App\Entity\Curso')->findOneByPersonGroupId($personGroupId);
