@@ -29,7 +29,7 @@ class PersonGroupRepository extends AbstractRepository {
         $presentes = array();
         $clase = $this->getClase($personGroupId);
         foreach ($alumnos as $alumno)
-            if (sizeof($alumno['candidates']) && $alumno['candidates'] >= CONFIDENCE) {
+            if (sizeof($alumno['candidates']) && $alumno['candidates'][0]['confidence'] >= CONFIDENCE) {
                 $this->alumnoPresente($clase, $alumno['candidates'][0]['personId']);
             }
         return array_unique($clase->getArrayCopy());
