@@ -35,8 +35,10 @@ final class PersonController {
         $personGroupId = strtolower($args['curso']);
         $alumno = $this->repository->getPerson($args['alumno']);
         $personId = $alumno->getPersonId();
-        $url = $request->getParsedBody()['url'] ? $request->getParsedBody()['url'] : $this->image->guardarImagen($request->getParsedBody()['base64']);
-        $res = $this->azure->personAddFace($personGroupId, $personId, $url);
+        $res = array();
+        $url = $request->getParsedBody()['url'] ? $request->getParsedBody()['url'] : $this->image->guardarImagen($request->getParsedBody()['base64'], $args['alumno']);
+        foreach ($url as $img)
+            $res[] = $this->azure->personAddFace($personGroupId, $personId, $img);
         return $response->withStatus(200)->withJson($res);
     }
 

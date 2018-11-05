@@ -19,7 +19,7 @@ class ImageService {
         ]);
     }
 
-    public function guardarImagen($base64Array) {
+    public function guardarImagen($base64Array, $subFolder = null) {
         $imagenes = array();
         foreach ($base64Array as $base64) {
             $imagen = $this->getDecodificada($base64);
@@ -29,7 +29,7 @@ class ImageService {
             try {
                 $result = $this->s3->putObject([
                     'Bucket' => 'ia.imagenes',
-                    'Key' => 'images/' . uniqid() . '.' . explode('/', $mime_type)[1],
+                    'Key' => 'images/' . ( $subFolder ? $subFolder . '/' : '') . uniqid() . '.' . explode('/', $mime_type)[1],
                     'Body' => $imagen,
                     'ContentType' => $mime_type,
                     'ACL' => 'public-read',
