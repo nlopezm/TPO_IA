@@ -65,4 +65,10 @@ final class PersonGroupController {
         return $response->withStatus(200)->withJson($res);
     }
 
+    public function asistenciaManual(RequestInterface $request, ResponseInterface $response, $args) {
+        $curso = strtolower($args['curso']);
+        $res = $this->repository->tomarAsistenciaManual($curso, $request->getParsedBody()['alumnos']);
+        return $response->withStatus(200)->withJson($res);
+    }
+
 }

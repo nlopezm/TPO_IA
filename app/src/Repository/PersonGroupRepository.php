@@ -55,5 +55,13 @@ class PersonGroupRepository extends AbstractRepository {
             $this->entityManager->flush($clase);
         } catch (\Exception $e) {}
     }
+    
+    public function tomarAsistenciaManual($personGroupId, $alumnos) {
+        $clase = $this->getClase($personGroupId);
+        $alumnos = $this->entityManager->getRepository("App\Entity\Alumno")->findById($alumnos);
+        $clase->setAlumnos($alumnos);
+        $this->entityManager->flush($clase);
+        return array_unique($clase->getArrayCopy());
+    }
 
 }
